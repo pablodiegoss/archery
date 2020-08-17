@@ -9,11 +9,9 @@ use amethyst::{
     utils::application_root_dir,
 };
 
-struct MyState;
+mod pong;
 
-impl SimpleState for MyState {
-    fn on_start(&mut self, _data: StateData<'_, GameData<'_, '_>>) {}
-}
+use crate::pong::GameState;
 
 fn main() -> amethyst::Result<()> {
     amethyst::start_logger(Default::default());
@@ -29,13 +27,12 @@ fn main() -> amethyst::Result<()> {
             RenderingBundle::<DefaultBackend>::new()
                 .with_plugin(
                     RenderToWindow::from_config_path(display_config_path)?
-                        .with_clear([0.34, 0.36, 0.52, 1.0]),
+                        .with_clear([0.00196, 0.23726, 0.21765, 1.0]),
                 )
                 .with_plugin(RenderFlat2D::default()),
-        )?
-        .with_bundle(TransformBundle::new())?;
+        )?;
 
-    let mut game = Application::new(assets_dir, MyState, game_data)?;
+    let mut game = Application::new(assets_dir, GameState, game_data)?;
     game.run();
 
     Ok(())

@@ -30,7 +30,8 @@ fn main() -> amethyst::Result<()> {
                         .with_clear([0.00196, 0.23726, 0.21765, 1.0]),
                 )
                 .with_plugin(RenderFlat2D::default()),
-        )?;
+        )?
+        .with_bundle(TransformBundle::new())?;
 
     let mut game = Application::new(assets_dir, GameState, game_data)?;
     game.run();
